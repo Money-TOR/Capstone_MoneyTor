@@ -1,0 +1,31 @@
+id_produk,id_seller,id_supplier,nama_produk,kategori_produk,harga_jual,harga_modal,stok_awal,minimum_stok,status_produk,tanggal_input_produk
+P001,U001,S001,Kopi Susu,Minuman,18000,9000,757,151,aktif,2024-01-21
+P002,U001,S001,Americano,Minuman,15000,7000,825,165,aktif,2024-01-15
+P003,U001,S001,Latte,Minuman,20000,10000,752,150,aktif,2024-01-22
+P004,U001,S002,Croissant,Bakery,18000,9000,444,89,aktif,2024-01-19
+P005,U001,S002,Cookies,Snack,12000,6000,415,83,aktif,2024-01-11
+P006,U002,S003,Beras 5kg,Sembako,75000,65000,2834,567,aktif,2024-03-05
+P007,U002,S003,Minyak Goreng 1L,Sembako,18000,15000,2207,441,aktif,2024-03-10
+P008,U002,S003,Gula Pasir 1kg,Sembako,16000,13000,2916,583,aktif,2024-03-13
+P009,U002,S003,Mie Instan,Makanan,3500,2500,801,160,aktif,2024-03-09
+P010,U002,S003,Kopi Sachet,Minuman,2500,1500,703,141,aktif,2024-03-15
+P011,U003,S004,Nasi Goreng,Makanan,20000,11000,857,171,aktif,2024-07-18
+P012,U003,S004,Ayam Geprek,Makanan,18000,10000,579,116,aktif,2024-07-20
+P013,U003,S004,Es Teh,Minuman,6000,2000,872,174,aktif,2024-07-28
+P014,U003,S005,Sosis Frozen,Frozen Food,12000,7000,549,110,aktif,2024-07-22
+P015,U003,S005,Nugget Ayam,Frozen Food,18000,10000,809,162,aktif,2024-07-21
+P016,U004,S002,Roti Coklat,Bakery,12000,6000,635,127,aktif,2024-10-02
+P017,U004,S002,Donat Gula,Bakery,8000,4000,440,88,aktif,2024-10-08
+P018,U004,S002,Brownies Mini,Bakery,15000,7000,585,117,aktif,2024-10-15
+P019,U004,S001,Matcha Latte,Minuman,22000,11000,735,147,aktif,2024-10-13
+P020,U004,S001,Thai Tea,Minuman,18000,9000,1095,219,aktif,2024-10-05
+P021,U005,S006,Deterjen Cair,Laundry,12000,7000,2976,595,aktif,2025-02-03
+P022,U005,S006,Pewangi Laundry,Laundry,10000,5000,3069,614,aktif,2025-02-08
+P023,U005,S006,Pembersih Noda,Laundry,15000,8000,3247,649,aktif,2025-02-15
+P024,U005,S006,Paket Cuci Kiloan,Jasa Laundry,7000,3000,3429,686,aktif,2025-02-07
+P025,U005,S006,Paket Express,Jasa Laundry,12000,5000,4918,984,aktif,2025-02-13
+P026,U006,S007,Hoodie Oversize,Fashion,85000,50000,561,112,aktif,2025-05-03
+P027,U006,S007,Kaos Vintage,Fashion,65000,35000,375,75,aktif,2025-05-10
+P028,U006,S007,Celana Cargo,Fashion,95000,55000,388,78,stok_menipis,2025-05-08
+P029,U006,S007,Topi Streetwear,Fashion,45000,25000,535,107,aktif,2025-05-12
+P030,U006,S007,Tas Totebag,Fashion,55000,30000,278,56,aktif,2025-05-07
