@@ -45,7 +45,7 @@ CREATE TABLE products (
   FOREIGN KEY (id_supplier) REFERENCES suppliers(id_supplier) ON DELETE SET NULL
 );
 
--- ⚠️ BERUBAH: tambah jam_transaksi
+
 CREATE TABLE transactions (
   id_transaksi      INT PRIMARY KEY AUTO_INCREMENT,
   id_seller         INT NOT NULL,
@@ -66,7 +66,6 @@ CREATE TABLE transactions (
   FOREIGN KEY (id_produk) REFERENCES products(id_produk)  ON DELETE SET NULL
 );
 
--- ⚠️ BERUBAH TOTAL: semua nama kolom diganti sesuai dataset DS
 CREATE TABLE logs (
   id_log           INT PRIMARY KEY AUTO_INCREMENT,
   id_produk        INT NOT NULL,
