@@ -1,44 +1,45 @@
+from fastapi import FastAPI
+from pydantic import BaseModel
 from google import genai
+from google.genai import types
 from dotenv import load_dotenv
 import os
 
 load_dotenv()
-API_KEY = os.getenv("GEMINI_API_KEY")
+
+app = FastAPI()
 
 client = genai.Client(
-    api_key=API_KEY
-)
-
-
-chat = client.chats.create(
-    model="gemini-3.1-flash-lite"
+    api_key=os.getenv("GEMINI_API_KEY")
 )
 
 system_prompt = """
 Kamu adalah Financial Assistant AI.
 
 Tugasmu:
-- Menjawab pertanyaan tentang keuangan, bisnis, investasi, akuntansi, dan analisis data.
-- Gunakan bahasa Indonesia.
-- Berikan penjelasan yang jelas dan profesional.
-- Jika pertanyaan di luar topik keuangan, tetap jawab dengan mengaitkannya ke perspektif bisnis atau keuangan jika memungkinkan.
+- Menjawab pertanyaan tentang keuangan
+- Menjawab pertanyaan tentang bisnis
+- Menjawab pertanyaan tentang investasi
+- Menjawab pertanyaan tentang akuntansi
+- Gunakan Bahasa Indonesia
+- Berikan jawaban yang jelas dan profesional
 """
 
-print("=" * 50)
-print("Financial Chatbot")
-print("Ketik 'exit' untuk keluar")
-print("=" * 50)
+chat = client.chats.create(
+    model="gemini-2.5-flash",
+    config=types.GenerateContentConfig(
+        system_instruction=system_prompt
+    )
+)
 
-# kirim instruksi sekali di awal
-chat.send_message(system_prompt)
+class ChatRequest(BaseModel):
+    message: str
 
-while True:
+@app.post("/chat")
+async def chat_endpoint(data: ChatRequest):
 
-    user_input = input("\nAnda : ")
+    response = chat.send_message(data.message)
 
-    if user_input.lower() == "exit":
-        break
-
-    response = chat.send_message(user_input)
-
-    print("\nBot :", response.text)
+    return {
+        "response": response.text
+    }
