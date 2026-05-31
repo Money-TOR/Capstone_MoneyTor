@@ -1,11 +1,17 @@
 from google import genai
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+API_KEY = os.getenv("GEMINI_API_KEY")
 
 client = genai.Client(
-    api_key="YOUR_API_KEY"
+    api_key=API_KEY
 )
 
+
 chat = client.chats.create(
-    model="gemini-2.5-flash"
+    model="gemini-3.1-flash-lite"
 )
 
 system_prompt = """
