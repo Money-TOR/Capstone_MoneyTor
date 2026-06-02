@@ -7,21 +7,21 @@ import joblib
 import numpy as np
 import pandas as pd
 import os
-import threading
 from pydantic import BaseModel
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import mean_absolute_error, mean_squared_error
-
+from dotenv import load_dotenv
+load_dotenv()
 app = FastAPI(title="Moneytor Rekomendasi API", version="2.0")
 
 #konfigurasi
-WINDOW_SIZE       = 8
+WINDOW_SIZE       = 12
 MIN_WEEKS         = 52
 TRAIN_RATIO       = 0.70
 VAL_RATIO         = 0.15
-EPOCHS            = 80
+EPOCHS            = 150
 BATCH_SIZE        = 8
-PATIENCE          = 8
+PATIENCE          = 15
 THRESHOLD_SEGERA  = 1.5
 THRESHOLD_MONITOR = 3.0
 API_KEY           = os.getenv("RETRAIN_API_KEY", "moneytor_secret_key")
@@ -82,10 +82,6 @@ def load_data():
 
 data = load_data()
 
-#Helper functions
-def safe_key(seller_id, category):
-    return f"{seller_id}__{category.strip().replace(' ', '_')}"
-
 def create_sequences(scaled_data, window_size):
     X, y = [], []
     for i in range(len(scaled_data) - window_size):
@@ -126,14 +122,15 @@ def classify_restock(predicted_demand, current_stock, minimum_stok):
     else:
         return "Stok Aman"
 
-#Fungsi training 1 kombinasi
-def train_one(seller_id, category, results):
-    key = safe_key(seller_id, category)
+def safe_key(category):
+    return category.strip().replace(" ", "_")
 
-    mask = (
-        (data["id_seller"]       == seller_id) &
-        (data["kategori_produk"] == category)
-    )
+#Fungsi training 1 kombinasi
+def train_one(category, results):
+    key = safe_key(category)
+
+    # Filter hanya per kategori
+    mask   = (data["kategori_produk"] == category)
     weekly = (
         data[mask]
         .set_index("tanggal")
@@ -145,9 +142,9 @@ def train_one(seller_id, category, results):
 
     if len(weekly) < MIN_WEEKS:
         results.append({
-            "key"    : key,
-            "status" : "skip",
-            "reason" : f"Data hanya {len(weekly)} minggu (min {MIN_WEEKS})"
+            "key"   : key,
+            "status": "skip",
+            "reason": f"Data hanya {len(weekly)} minggu (min {MIN_WEEKS})"
         })
         return
 
@@ -197,31 +194,26 @@ def train_one(seller_id, category, results):
     })
 
 #Fungsi retrain (dijalankan di background)
-def run_retrain(seller_id=None, category=None, only_new=True):
+def run_retrain(category=None, only_new=True):
     global retrain_status, data
     retrain_status["is_running"] = True
     retrain_status["message"]    = "Training sedang berjalan..."
 
     try:
-        data = load_data()
-
+        data    = load_data()
         results = []
 
-        if seller_id and category:
-            train_one(seller_id, category, results)
+        if category:
+            # Train 1 kategori spesifik
+            train_one(category, results)
         else:
-            seller_cat_pairs = (
-                data
-                .groupby(["id_seller", "kategori_produk"])
-                .size()
-                .reset_index(name="total_transaksi")
-            )
-            for _, row in seller_cat_pairs.iterrows():
-                key = safe_key(row["id_seller"], row["kategori_produk"])
-                #skip yang sudah punya model
+            # Train semua kategori
+            categories = data["kategori_produk"].unique()
+            for cat in categories:
+                key = safe_key(cat)
                 if only_new and key in models:
                     continue
-                train_one(row["id_seller"], row["kategori_produk"], results)
+                train_one(cat, results)
 
         success = [r for r in results if r.get("status") == "success"]
         skipped = [r for r in results if r.get("status") == "skip"]
@@ -238,21 +230,18 @@ def run_retrain(seller_id=None, category=None, only_new=True):
         retrain_status["message"] = f"Error: {str(e)}"
 
     finally:
-        retrain_status["is_running"] = True
         from datetime import datetime
         retrain_status["last_run"]   = datetime.now().isoformat()
         retrain_status["is_running"] = False
 
 #Schema
 class PredictionRequest(BaseModel):
-    seller_id    : str
     category     : str
     current_stock: float
     minimum_stok : float = 10.0
 
 class RetrainRequest(BaseModel):
     api_key   : str
-    seller_id : str | None = None
     category  : str | None = None
     only_new  : bool        = True
 
@@ -275,7 +264,7 @@ def get_categories():
 
 @app.post("/predict")
 def predict(req: PredictionRequest):
-    key = safe_key(req.seller_id, req.category)
+    key = safe_key(req.category)
 
     if key not in models:
         raise HTTPException(
@@ -283,10 +272,7 @@ def predict(req: PredictionRequest):
             detail=f"Model '{key}' tidak ditemukan. Jalankan /retrain terlebih dahulu."
         )
 
-    mask = (
-        (data["id_seller"]       == req.seller_id) &
-        (data["kategori_produk"] == req.category)
-    )
+    mask = (data["kategori_produk"] == req.category)
     weekly = (
         data[mask]
         .set_index("tanggal")
@@ -308,7 +294,6 @@ def predict(req: PredictionRequest):
     status = classify_restock(pred_actual, req.current_stock, req.minimum_stok)
 
     return {
-        "seller_id"       : req.seller_id,
         "category"        : req.category,
         "prediksi_demand" : round(pred_actual, 2),
         "stok_aktual"     : req.current_stock,
@@ -319,30 +304,22 @@ def predict(req: PredictionRequest):
 
 @app.post("/retrain")
 def retrain(req: RetrainRequest, background_tasks: BackgroundTasks):
-    #validasi API key
     if req.api_key != API_KEY:
         raise HTTPException(status_code=403, detail="API key tidak valid")
 
-    #Cegah double training
     if retrain_status["is_running"]:
         raise HTTPException(status_code=409, detail="Training sedang berjalan, tunggu selesai")
 
-    #validasi: kalau isi seller_id, category harus diisi juga
-    if req.seller_id and not req.category:
-        raise HTTPException(status_code=400, detail="category wajib diisi jika seller_id diisi")
-
-    #Jalankan training di background agar tidak blokir request lain
     background_tasks.add_task(
         run_retrain,
-        seller_id=req.seller_id,
         category=req.category,
         only_new=req.only_new
     )
 
     return {
-        "message" : "Training dimulai di background",
-        "info"    : "Cek progress di GET /retrain/status",
-        "mode"    : "single" if req.seller_id else ("new_only" if req.only_new else "all")
+        "message": "Training dimulai di background",
+        "info"   : "Cek progress di GET /retrain/status",
+        "mode"   : "single" if req.category else ("new_only" if req.only_new else "all")
     }
 
 @app.get("/retrain/status")
