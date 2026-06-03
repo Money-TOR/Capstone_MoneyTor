@@ -1,0 +1,232 @@
+{
+  "intents": [
+    {
+      "tag": "greeting",
+      "patterns": [
+        "Halo",
+        "Hai",
+        "Hello",
+        "Hi",
+        "Selamat pagi",
+        "Selamat siang",
+        "Selamat malam"
+      ],
+      "responses": [
+        "Halo! Selamat datang di sistem manajemen keuangan usaha",
+        "Hai, ada yang bisa saya bantu terkait usaha dan keuangan Anda?",
+        "Halo! Saya siap membantu pengelolaan usaha Anda."
+      ]
+    },
+    {
+      "tag": "goodbye",
+      "patterns": [
+        "Bye",
+        "Sampai jumpa",
+        "Dadah",
+        "Terima kasih",
+        "Goodbye"
+      ],
+      "responses": [
+        "Sampai jumpa dan semoga usaha Anda sukses",
+        "Terima kasih telah menggunakan sistem kami.",
+        "Semoga hari Anda menyenangkan!"
+      ]
+    },
+    {
+      "tag": "thanks",
+      "patterns": [
+        "Terima kasih",
+        "Makasih",
+        "Thank you",
+        "Thanks"
+      ],
+      "responses": [
+        "Sama-sama",
+        "Senang bisa membantu.",
+        "Jika ada pertanyaan lain silakan tanyakan kembali."
+      ]
+    },
+    {
+      "tag": "profit_loss",
+      "patterns": [
+        "Bagaimana cara menghitung laba rugi?",
+        "Apa itu laba rugi?",
+        "Cara melihat keuntungan usaha",
+        "Bagaimana menghitung keuntungan?"
+      ],
+      "responses": [
+        "Laba rugi dihitung dari total pemasukan dikurangi total pengeluaran.",
+        "Anda dapat melihat laporan laba rugi pada menu laporan keuangan.",
+        "Keuntungan usaha dapat dipantau melalui fitur laporan laba rugi."
+      ]
+    },
+    {
+      "tag": "income",
+      "patterns": [
+        "Cara mencatat pemasukan",
+        "Bagaimana menambah pemasukan?",
+        "Input pemasukan usaha",
+        "Tambah transaksi pemasukan"
+      ],
+      "responses": [
+        "Anda dapat menambahkan pemasukan melalui menu transaksi pemasukan.",
+        "Silakan buka menu pemasukan lalu isi nominal dan kategori transaksi.",
+        "Pemasukan usaha dapat dicatat secara real-time melalui dashboard."
+      ]
+    },
+    {
+      "tag": "expense",
+      "patterns": [
+        "Cara mencatat pengeluaran",
+        "Tambah pengeluaran",
+        "Bagaimana input pengeluaran?",
+        "Catat biaya operasional"
+      ],
+      "responses": [
+        "Pengeluaran dapat dicatat melalui menu pengeluaran.",
+        "Silakan isi nominal, kategori, dan deskripsi pengeluaran usaha.",
+        "Fitur pengeluaran membantu memantau biaya operasional usaha."
+      ]
+    },
+    {
+      "tag": "stock",
+      "patterns": [
+        "Cara mengelola stok",
+        "Bagaimana menambah stok barang?",
+        "Cek stok barang",
+        "Barang masuk dan keluar"
+      ],
+      "responses": [
+        "Anda dapat mengelola stok pada menu manajemen stok.",
+        "Fitur stok membantu mencatat barang masuk, keluar, dan rusak.",
+        "Stok barang dapat dipantau secara otomatis melalui dashboard."
+      ]
+    },
+    {
+      "tag": "report",
+      "patterns": [
+        "Lihat laporan keuangan",
+        "Bagaimana melihat laporan bulanan?",
+        "Cetak laporan usaha",
+        "Laporan tahunan usaha"
+      ],
+      "responses": [
+        "Laporan keuangan tersedia dalam bentuk bulanan dan tahunan.",
+        "Anda dapat melihat laporan usaha melalui menu laporan.",
+        "Sistem menyediakan ringkasan pemasukan, pengeluaran, dan laba rugi."
+      ]
+    },
+    {
+      "tag": "dashboard",
+      "patterns": [
+        "Apa fungsi dashboard?",
+        "Dashboard digunakan untuk apa?",
+        "Informasi pada dashboard",
+        "Menu utama aplikasi"
+      ],
+      "responses": [
+        "Dashboard menampilkan ringkasan kondisi usaha Anda.",
+        "Pada dashboard Anda dapat melihat pemasukan, pengeluaran, laba, dan stok.",
+        "Dashboard membantu memantau performa usaha secara cepat."
+      ]
+    },
+    {
+      "tag": "business_advice",
+      "patterns": [
+        "Beri saran usaha",
+        "Tips mengelola usaha",
+        "Bagaimana usaha bisa berkembang?",
+        "Tips bisnis untuk UMKM"
+      ],
+      "responses": [
+        "Pisahkan keuangan pribadi dan usaha agar arus kas lebih teratur.",
+        "Catat seluruh transaksi secara konsisten untuk memantau perkembangan usaha.",
+        "Lakukan evaluasi pengeluaran secara rutin agar keuntungan lebih optimal."
+      ]
+    },
+    {
+      "tag": "saving",
+      "patterns": [
+        "Cara menghemat pengeluaran",
+        "Tips mengatur keuangan usaha",
+        "Bagaimana mengurangi biaya usaha?",
+        "Tips keuangan UMKM"
+      ],
+      "responses": [
+        "Kurangi pengeluaran yang tidak terlalu penting untuk menjaga cash flow.",
+        "Lakukan pencatatan rutin agar pengeluaran lebih terkontrol.",
+        "Pisahkan dana operasional dan keuntungan usaha."
+      ]
+    },
+    {
+      "tag": "recommendation",
+      "patterns": [
+        "Produk terlaris saya apa?",
+        "Rekomendasi usaha",
+        "Barang yang sering dibeli",
+        "Analisis penjualan"
+      ],
+      "responses": [
+        "Produk terlaris dapat dilihat dari data transaksi penjualan.",
+        "Sistem dapat membantu melihat tren produk yang paling sering terjual.",
+        "Analisis transaksi membantu menentukan strategi penjualan."
+      ]
+    },
+    {
+      "tag": "wallet",
+      "patterns": [
+        "Apa itu wallet?",
+        "Saldo usaha saya",
+        "Simulasi modal usaha",
+        "Kelola modal usaha"
+      ],
+      "responses": [
+        "Fitur wallet digunakan untuk memantau saldo usaha.",
+        "Simulasi modal membantu menghitung kondisi keuangan usaha.",
+        "Saldo usaha dapat digunakan untuk memantau arus kas bisnis."
+      ]
+    },
+    {
+      "tag": "login",
+      "patterns": [
+        "Saya tidak bisa login",
+        "Cara login",
+        "Masuk ke akun",
+        "Login gagal"
+      ],
+      "responses": [
+        "Pastikan email dan password sudah benar.",
+        "Silakan gunakan akun yang sudah terdaftar.",
+        "Jika login gagal, coba periksa kembali koneksi dan data akun Anda."
+      ]
+    },
+    {
+      "tag": "register",
+      "patterns": [
+        "Cara daftar akun",
+        "Bagaimana registrasi?",
+        "Membuat akun usaha",
+        "Register akun"
+      ],
+      "responses": [
+        "Anda dapat membuat akun melalui halaman register.",
+        "Isi data usaha dan informasi pengguna untuk membuat akun baru.",
+        "Registrasi akun hanya membutuhkan email dan password."
+      ]
+    },
+    {
+      "tag": "motivation",
+      "patterns": [
+        "Berikan motivasi bisnis",
+        "Saya semangat usaha",
+        "Motivasi untuk UMKM",
+        "Kata semangat bisnis"
+      ],
+      "responses": [
+        "Kesuksesan usaha dimulai dari konsistensi",
+        "Jangan takut gagal, evaluasi adalah bagian dari perkembangan bisnis.",
+        "Usaha kecil yang dikelola dengan baik dapat berkembang menjadi besar."
+      ]
+    }
+  ]
+}
