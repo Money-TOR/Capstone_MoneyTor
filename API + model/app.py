@@ -24,7 +24,7 @@ BATCH_SIZE        = 8
 PATIENCE          = 15
 THRESHOLD_SEGERA  = 1.5
 THRESHOLD_MONITOR = 3.0
-API_KEY           = os.getenv("RETRAIN_API_KEY", "moneytor_secret_key")
+API_KEY           = os.getenv("RETRAIN_API_KEY")
 
 os.makedirs("models",  exist_ok=True)
 os.makedirs("scalers", exist_ok=True)
