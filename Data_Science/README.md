@@ -62,8 +62,20 @@ Data_Science/
 ## Menjalankan Dashboard
 
 ```bash
+1. Clone atau Download Repository
+Pastikan seluruh struktur folder tetap sama seperti yang terdapat pada repositori.
+
+2. Install Dependencies
+Buka terminal pada root folder Data_Science, lalu jalankan:
 pip install -r requirements.txt
+
+3. Jalankan Dashboard Streamlit
+Masih pada folder Data_Science, jalankan:
 streamlit run Dashboard/Dashboard.py
+
+4. Akses Dashboard
+Setelah proses berhasil, dashboard dapat diakses melalui browser pada alamat:
+http://localhost:8501
 ```
 
 ## Dashboard
