@@ -1,0 +1,286 @@
+/* ===== AETHER REGISTER — senada Login ===== */
+.register-page {
+    min-height: 100vh;
+    background: #0a0a0a;
+    background-image: radial-gradient(ellipse 60% 50% at 50% -10%, rgba(16,185,129,0.18) 0%, transparent 70%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+}
+
+.register-card {
+    width: 100%;
+    max-width: 400px;
+    background: #111111;
+    border-radius: 20px;
+    padding: 36px 32px;
+    border: 1px solid #222222;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.03) inset;
+}
+
+/* Logo / Header */
+.register-card .logo-box {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.register-card .logo-box h1 {
+    font-size: 26px;
+    font-weight: 800;
+    color: #f0effe;
+    letter-spacing: -0.03em;
+    margin-bottom: 6px;
+}
+
+.register-card .logo-box p {
+    font-size: 13px;
+    color: #4a4460;
+    font-weight: 400;
+}
+
+/* Input wrapper — same as Login */
+.register-card .input-wrapper {
+    margin-bottom: 14px;
+}
+
+.register-card .input-wrapper label {
+    display: block;
+    font-size: 13px;
+    margin-bottom: 7px;
+    color: #a09ab8;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+}
+
+.register-card .input-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid #222222;
+    border-radius: 12px;
+    padding: 12px 14px;
+    transition: all 0.2s;
+    background: #0f0f0f;
+    color: #f0effe;
+}
+
+.register-card .input-box:focus-within {
+    border-color: #10b981;
+    box-shadow: 0 0 0 3px rgba(16,185,129,0.18);
+}
+
+.register-card .input-box input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 14px;
+    background: transparent;
+    color: #f0effe;
+    font-family: 'Inter', sans-serif;
+}
+
+.register-card .input-box input::placeholder {
+    color: #3d3650;
+}
+
+.register-card .input-box svg {
+    color: #4a4460;
+    stroke: #4a4460;
+    flex-shrink: 0;
+}
+
+/* Eye button */
+.register-card .eye-btn {
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    color: #4a4460;
+    transition: color 0.2s;
+}
+
+.register-card .eye-btn:hover { color: #10b981; }
+
+/* Submit button — SAMA persis login */
+.register-submit {
+    width: 100%;
+    border: none;
+    background: linear-gradient(135deg, #10b981, #14b8a6);
+    color: white;
+    padding: 14px;
+    border-radius: 12px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-family: 'Inter', sans-serif;
+    box-shadow: 0 4px 16px rgba(16,185,129,0.3), 0 0 0 1px rgba(255,255,255,0.08) inset;
+    letter-spacing: 0.01em;
+    margin-top: 6px;
+}
+
+.register-submit:hover {
+    background: linear-gradient(135deg, #34d399, #10b981);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 24px rgba(16,185,129,0.4), 0 0 0 1px rgba(255,255,255,0.1) inset;
+}
+
+.register-submit:active { transform: translateY(0); }
+
+/* ===== RESPONSIVE REGISTER ===== */
+
+/* Tablet (641px - 1024px) */
+@media (max-width: 1024px) {
+    .register-page {
+        padding: 20px;
+    }
+
+    .register-card {
+        padding: 28px;
+        max-width: 380px;
+    }
+
+    .register-card .logo-box h1 {
+        font-size: 24px;
+        margin-bottom: 4px;
+    }
+
+    .register-card .input-wrapper label {
+        font-size: 12px;
+    }
+
+    .register-card .input-box {
+        padding: 11px 13px;
+    }
+
+    .register-submit {
+        font-size: 14px;
+    }
+}
+
+/* Mobile (max-width: 640px) */
+@media (max-width: 640px) {
+    .register-page {
+        padding: 16px;
+        justify-content: flex-start;
+        padding-top: 40px;
+    }
+
+    .register-card {
+        width: 100%;
+        max-width: 100%;
+        padding: 24px;
+        border-radius: 16px;
+    }
+
+    .register-card .logo-box {
+        margin-bottom: 20px;
+    }
+
+    .register-card .logo-box h1 {
+        font-size: 20px;
+        margin-bottom: 2px;
+    }
+
+    .register-card .logo-box p {
+        font-size: 12px;
+    }
+
+    .register-card .input-wrapper {
+        margin-bottom: 12px;
+    }
+
+    .register-card .input-wrapper label {
+        font-size: 11px;
+        margin-bottom: 6px;
+    }
+
+    .register-card .input-box {
+        padding: 10px 12px;
+        gap: 8px;
+    }
+
+    .register-card .input-box input {
+        font-size: 16px; /* Prevent zoom on iOS */
+    }
+
+    .register-card .input-box input::placeholder {
+        font-size: 14px;
+    }
+
+    .register-submit {
+        padding: 11px 1.25rem;
+        font-size: 13px;
+        border-radius: 10px;
+    }
+
+    .login-link {
+        font-size: 12px;
+    }
+
+    .login-link a {
+        font-size: 12px;
+    }
+}
+
+/* Small Mobile (max-width: 375px) */
+@media (max-width: 375px) {
+    .register-page {
+        padding: 12px;
+        padding-top: 30px;
+    }
+
+    .register-card {
+        padding: 20px;
+    }
+
+    .register-card .logo-box h1 {
+        font-size: 18px;
+    }
+
+    .register-card .input-box {
+        padding: 9px 11px;
+        gap: 7px;
+    }
+
+    .register-submit {
+        padding: 10px 1rem;
+        font-size: 12px;
+    }
+}
+
+/* Bottom text — sama login */
+.register-card .bottom-text {
+    text-align: center;
+    margin-top: 22px;
+    font-size: 13px;
+    color: #4a4460;
+}
+
+.register-card .bottom-text a {
+    color: #10b981;
+    margin-left: 4px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.register-card .bottom-text a:hover { color: #a7f3d0; }
+
+/* Autofill fix */
+.register-card input:-webkit-autofill,
+.register-card input:-webkit-autofill:hover,
+.register-card input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0px 1000px #0f0f0f inset !important;
+    -webkit-text-fill-color: #f0effe !important;
+    border-color: #222222 !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
